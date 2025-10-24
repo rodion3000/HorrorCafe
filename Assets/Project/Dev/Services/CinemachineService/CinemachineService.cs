@@ -5,52 +5,28 @@ namespace Project.Dev.Services.CinemachineService
 {
     public class CinemachineService : ICinemachineService
     {
-        private CinemachineVirtualCamera _moveCamera;
-        private CinemachineVirtualCamera _rotationCamera;
+        private CinemachineVirtualCamera _heroCamera;
+        public CinemachinePOV Pov { get; private set; }
 
-        public CinemachineService(CinemachineVirtualCamera moveCamera, CinemachineVirtualCamera rotationCamera)
+        public CinemachineService(CinemachineVirtualCamera heroCamera)
         {
-            _moveCamera = moveCamera;
-            _rotationCamera = rotationCamera;
+            _heroCamera = heroCamera;
         }
 
-
-        public void SwitchToCamera(int cameraNumber)
+        public void HeroCamera(GameObject hero)
         {
-            if (cameraNumber == 1)
+            Transform headCamera = hero.transform.Find("HeadCamera");
+            _heroCamera.Follow = headCamera;
+            _heroCamera.LookAt = headCamera;
+            Pov = _heroCamera.GetCinemachineComponent<CinemachinePOV>();
+            if (Pov == null)
             {
-                _moveCamera.Priority = 20;
-                _rotationCamera.Priority = 10;
-            }
-            else if (cameraNumber == 2)
-            {
-                _moveCamera.Priority = 10;
-                _rotationCamera.Priority = 20;
+                Pov = _heroCamera.AddCinemachineComponent<CinemachinePOV>();
+                Pov.m_VerticalAxis.m_InputAxisName = "";
+                Pov.m_VerticalAxis.m_MinValue = -80f;
+                Pov.m_VerticalAxis.m_MaxValue = 80f;
             }
         }
 
-        public void MoveCamera(GameObject hero)
-        {
-            _moveCamera.Priority = 10;
-            _moveCamera.Follow = hero.transform;
-            _moveCamera.LookAt = hero.transform;
-        }
-
-        public void RotationCamera(GameObject hero)
-        {
-            Transform heroSpine = hero.transform
-                .Find("Model")
-                .Find("GameSkeleton")
-                .Find("Hips")
-                .Find("Spine");
-
-            if (heroSpine != null)
-            {
-                _rotationCamera.Priority = 20;
-                _rotationCamera.Follow = heroSpine;
-                _rotationCamera.LookAt = hero.transform;
-            }
-
-        }
     }
 }

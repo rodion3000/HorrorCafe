@@ -12,7 +12,7 @@ namespace Project.Dev.Infrastructure.Factories
 {
     public class HeroFactorie : IHeroFactorie
     {
-        private const string HeroPrefabId = "Player1";
+        private const string HeroPrefabId = "Player";
         private readonly IStaticDataService _staticDataService;
         private readonly IAssetProvider _assetProvider;
         private readonly DiContainer _container;

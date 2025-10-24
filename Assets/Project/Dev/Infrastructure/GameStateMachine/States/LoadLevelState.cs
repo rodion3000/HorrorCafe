@@ -83,8 +83,7 @@ namespace Project.Dev.Infrastructure.GameStateMachine.States
         }
         private void SetupCamera(GameObject hero)
         {
-            _cinemachineService.RotationCamera(hero);
-            _cinemachineService.MoveCamera(hero);
+            _cinemachineService.HeroCamera(hero);
         }
 
         private async Task SetupLocation() =>

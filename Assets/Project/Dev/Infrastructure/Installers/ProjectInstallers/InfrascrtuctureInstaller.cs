@@ -53,12 +53,9 @@ namespace Project.Dev.Infrastructure.Installers.ProjectInstallers
             var cinemachineMovePrefab = Instantiate(cinemachine, this.transform)
                 .GetComponent<CinemachineVirtualCamera>();
             cinemachineMovePrefab.gameObject.name = "CinemachineMoveCamera";
-            var cinemachineRotationPrefab = Instantiate(cinemachine, this.transform)
-                .GetComponent<CinemachineVirtualCamera>();
-            cinemachineRotationPrefab.gameObject.name = "CinemachineRotationCamera";
 
             Container.BindInterfacesAndSelfTo<CinemachineService>().AsSingle()
-                .WithArguments(cinemachineMovePrefab, cinemachineRotationPrefab)
+                .WithArguments(cinemachineMovePrefab)
                 .NonLazy();
         }
 
