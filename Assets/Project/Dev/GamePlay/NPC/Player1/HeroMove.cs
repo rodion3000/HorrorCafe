@@ -57,12 +57,11 @@ namespace Project.Dev.GamePlay.NPC.Player1
 
     private void Rotation()
     {
-
         if(_inputService.AimAxis.sqrMagnitude > 2f)
         {
             Vector2 aimVector = _inputService.AimAxis;
-            transform.Rotate(Vector3.up * (aimVector.x * rotationSpeed * Time.deltaTime));
-            _cinemachineService.Pov.m_VerticalAxis.Value -= aimVector.y * rotationSpeed * Time.deltaTime;
+            _cinemachineService.Pov.m_HorizontalAxis.Value += aimVector.x * Time.fixedDeltaTime;
+            _cinemachineService.Pov.m_VerticalAxis.Value -= aimVector.y * Time.fixedDeltaTime;
         }
     }
 

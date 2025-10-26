@@ -23,8 +23,15 @@ namespace Project.Dev.Services.CinemachineService
             {
                 Pov = _heroCamera.AddCinemachineComponent<CinemachinePOV>();
                 Pov.m_VerticalAxis.m_InputAxisName = "";
+                Pov.m_HorizontalAxis.m_InputAxisName = "";
                 Pov.m_VerticalAxis.m_MinValue = -80f;
                 Pov.m_VerticalAxis.m_MaxValue = 80f;
+                Pov.m_VerticalAxis.m_AccelTime = 0f;
+                Pov.m_VerticalAxis.m_DecelTime = 0f;
+                Pov.m_HorizontalAxis.m_AccelTime = 0f;
+                Pov.m_HorizontalAxis.m_DecelTime = 0f;
+                Pov.m_VerticalAxis.m_MaxSpeed = 400f;
+                Pov.m_HorizontalAxis.m_MaxSpeed = 500f;
             }
         }
 

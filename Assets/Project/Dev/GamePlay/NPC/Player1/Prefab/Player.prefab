@@ -75,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   characterController: {fileID: 6990974435738060537}
-  rotationSpeed: 11
+  rotationSpeed: 8
 --- !u!1 &3669955358238404084
 GameObject:
   m_ObjectHideFlags: 0
