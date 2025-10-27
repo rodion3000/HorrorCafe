@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3489650202776837823}
   - component: {fileID: 6990974435738060537}
   - component: {fileID: 3284515930113949601}
+  - component: {fileID: 879276559372992400}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -75,7 +76,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   characterController: {fileID: 6990974435738060537}
-  rotationSpeed: 15
+  rotationSpeed: 8
+--- !u!114 &879276559372992400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3615171888451740800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c78e5943005d74d85b156e148fbcd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdPoint: {fileID: 0}
+  pickupDistance: 3
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &3669955358238404084
 GameObject:
   m_ObjectHideFlags: 0

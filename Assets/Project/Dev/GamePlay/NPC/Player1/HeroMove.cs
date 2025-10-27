@@ -6,39 +6,39 @@ using Zenject;
 namespace Project.Dev.GamePlay.NPC.Player1
 {
     public class HeroMove : MonoBehaviour
+{
+    [SerializeField] private int movementSpeed;
+    [SerializeField] private CharacterController characterController;
+    [SerializeField] private float rotationSpeed ;
+
+    private IInputService _inputService;
+    private ICinemachineService _cinemachineService;
+
+    [Inject]
+    private void Construct(IInputService inputService, ICinemachineService cinemachineService)
     {
-        [SerializeField] private int movementSpeed;
-        [SerializeField] private CharacterController characterController;
-        [SerializeField] private float rotationSpeed;
-        private float _rotationAngle;
-        private IInputService _inputService;
-        private ICinemachineService _cinemachineService;
+        _inputService = inputService;
+        _cinemachineService = cinemachineService;
+    }
 
-        [Inject]
-        private void Construct(IInputService inputService, ICinemachineService cinemachineService)
-        {
-            _inputService = inputService;
-            _cinemachineService = cinemachineService;
-        }
-
-        private void Start()
-        {
-            Cursor.visible = false;
-        }
-
-        void Update()
-        {
-            Move();
-        }
-
-        private void LateUpdate()
-        {
-             Rotation();
-        }
-
-        private void Move()
+    private void Start()
     {
-        var camTransform = Camera.main.transform;
+        Cursor.visible = false;
+    }
+
+    private void Update()
+    {
+        Move();
+    }
+
+    private void LateUpdate()
+    {
+        Rotation();
+    }
+
+    private void Move()
+    {
+        Transform camTransform = Camera.main.transform;
 
         Vector3 forwardVector = camTransform.forward;
         forwardVector.y = 0;
@@ -58,13 +58,11 @@ namespace Project.Dev.GamePlay.NPC.Player1
     private void Rotation()
     {
         Vector2 rotationAxis = _inputService.AimAxis;
-        rotationAxis = Vector2.zero;
-        if(_inputService.AimAxis.sqrMagnitude > 2f)
+        if (rotationAxis.sqrMagnitude > 2f && _cinemachineService.Pov != null)
         {
             _cinemachineService.Pov.m_HorizontalAxis.Value += rotationAxis.x * rotationSpeed * Time.deltaTime;
             _cinemachineService.Pov.m_VerticalAxis.Value -= rotationAxis.y * rotationSpeed * Time.deltaTime;
         }
     }
-
-    }
+}
 }
