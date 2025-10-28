@@ -56,6 +56,7 @@ namespace Project.Dev.GamePlay.NPC.Player1
                 heldJoint.connectedAnchor = Vector3.Lerp(heldJoint.connectedAnchor, targetAnchor, 0.5f);
             }
         }
+        
 
         private void HandleHighlight()
         {
