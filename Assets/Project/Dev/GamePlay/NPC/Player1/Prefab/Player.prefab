@@ -93,8 +93,11 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 8
+  holdDistance: 1.5
   jointSpring: 100
   jointDamping: 100
+  maxForce: 2000
+  highlightColor: {r: 0.47067425, g: 0.764151, b: 0.010813437, a: 1}
 --- !u!1 &3669955358238404084
 GameObject:
   m_ObjectHideFlags: 0
