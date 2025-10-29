@@ -38,6 +38,11 @@ namespace Project.Dev.GamePlay.NPC.Player1
             if (IsHolding) DropObject();
             else TryPickupObject();
         }
+
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            if (IsHolding) ThrowObject();
+        }
     }
 
     private void FixedUpdate()
@@ -123,6 +128,20 @@ namespace Project.Dev.GamePlay.NPC.Player1
 
         if (heldObject)
         {
+            heldObject.drag = 0f;
+            heldObject.angularDrag = 0.05f;
+            heldObject.constraints = RigidbodyConstraints.None;
+            heldObject = null;
+        }
+    }
+
+    private void ThrowObject()
+    {
+        if (heldJoint) Destroy(heldJoint);
+
+        if (heldObject)
+        {
+            heldObject.AddForce(cam.transform.forward * 5f, ForceMode.Impulse);
             heldObject.drag = 0f;
             heldObject.angularDrag = 0.05f;
             heldObject.constraints = RigidbodyConstraints.None;
