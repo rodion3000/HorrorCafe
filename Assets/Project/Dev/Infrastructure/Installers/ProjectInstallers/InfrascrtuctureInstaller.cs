@@ -1,13 +1,18 @@
 using Cinemachine;
 using Project.Data.HeroLocalData;
+using Project.Dev.GamePlay.Items.Event;
+using Project.Dev.GamePlay.Items.Handler;
+using Project.Dev.GamePlay.Items.Interface;
 using Project.Dev.Infrastructure.AssetManager;
 using Project.Dev.Infrastructure.Factories;
 using Project.Dev.Infrastructure.Factories.Interfaces;
 using Project.Dev.Infrastructure.SceneManagment;
 using Project.Dev.Services.CinemachineService;
 using Project.Dev.Services.InputService;
+using Project.Dev.Services.Interfaces;
 using Project.Dev.Services.LevelProgress;
 using Project.Dev.Services.Logging;
+using Project.Dev.Services.RxEventService;
 using Project.Dev.Services.StaticDataService;
 using UnityEngine;
 using Zenject;
@@ -25,6 +30,7 @@ namespace Project.Dev.Infrastructure.Installers.ProjectInstallers
             Container.Bind<SceneLoader>().AsSingle();
             BindServices();
             BindFactories();
+            BindItemsHandler();
         }
 
         private void BindServices()
@@ -32,6 +38,7 @@ namespace Project.Dev.Infrastructure.Installers.ProjectInstallers
             Container.Bind<ILoggingService>().To<LoggingService>().AsSingle().NonLazy();
             BindCinemachineService();
             Container.Bind<IInputService>().To<InputService>().AsSingle().NonLazy();
+            Container.Bind<IRxEventService>().To<RxEventService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<StaticDataService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<LevelProgressServiceResolver>()
                 .AsSingle()
@@ -57,6 +64,11 @@ namespace Project.Dev.Infrastructure.Installers.ProjectInstallers
             Container.BindInterfacesAndSelfTo<CinemachineService>().AsSingle()
                 .WithArguments(cinemachineMovePrefab)
                 .NonLazy();
+        }
+
+        private void BindItemsHandler()
+        {
+            Container.Bind<IItemEventHandler<ItemPlacedEvent>>().To<ItemPlacedHandler>().AsTransient();
         }
 
     }
