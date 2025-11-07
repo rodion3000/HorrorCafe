@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 135582898057852289}
   - component: {fileID: 2409443493581202123}
+  - component: {fileID: 673428821892272948}
   m_Layer: 0
   m_Name: CoffeTrigger
   m_TagString: Untagged
@@ -53,6 +54,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8617834, y: 0.24251486, z: 1.1944509}
   m_Center: {x: -0.03248726, y: 0.37874216, z: -0.09722708}
+--- !u!114 &673428821892272948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4306132017985222947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d949709448d514ba816204f249f81e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6207298322086706009
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,6 +244,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1260509037344049221, guid: d0e3987c25703604496fcb9a98cf9ccb, type: 3}
+      propertyPath: m_TagString
+      value: Coffee
+      objectReference: {fileID: 0}
     - target: {fileID: 1267209806162094085, guid: d0e3987c25703604496fcb9a98cf9ccb, type: 3}
       propertyPath: m_LODs.Array.data[0].renderers.Array.data[0].renderer
       value: 
@@ -286,6 +303,10 @@ PrefabInstance:
     - target: {fileID: 4434425971888377552, guid: d0e3987c25703604496fcb9a98cf9ccb, type: 3}
       propertyPath: m_Shadows.m_Type
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764386432990502393, guid: d0e3987c25703604496fcb9a98cf9ccb, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4941265962479565530, guid: d0e3987c25703604496fcb9a98cf9ccb, type: 3}
       propertyPath: m_Shadows.m_Type

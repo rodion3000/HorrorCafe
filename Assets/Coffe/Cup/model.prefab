@@ -94,9 +94,9 @@ GameObject:
   - component: {fileID: 7860756419581230591}
   - component: {fileID: 3015376301228186026}
   - component: {fileID: 5167575065302747752}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Coffee
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 8686217649285442454}
   m_Layer: 0
   m_Name: model
-  m_TagString: Untagged
+  m_TagString: Coffe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 3077191830147802270}
   - component: {fileID: 5604218540885113469}
   - component: {fileID: 337193029041402394}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

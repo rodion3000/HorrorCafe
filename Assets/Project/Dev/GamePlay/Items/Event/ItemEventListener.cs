@@ -12,7 +12,12 @@ namespace Project.Dev.GamePlay.Items.Event
         private IRxEventService _eventService;
         private readonly CompositeDisposable _compositeDisposable;
 
-        public ItemEventListener(IRxEventService eventService) => _eventService = eventService;
+        [Inject]
+        private void Construct(IRxEventService eventService)
+        {
+            Debug.Log("dfgfdg");
+            _eventService = eventService;
+        }
 
         private void Start()
         {

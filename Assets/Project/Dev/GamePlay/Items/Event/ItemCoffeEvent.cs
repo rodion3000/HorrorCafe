@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Project.Dev.GamePlay.Items.Event
 {
-    public class ItemPlacedEvent : IItemEvent
+    public class ItemCoffeEvent : IItemEvent
     {
         public GameObject Item { get; }
-        public ItemPlacedEvent(GameObject item) => Item = item;
+        public ItemCoffeEvent(GameObject item) => Item = item;
     }
 }

@@ -68,7 +68,7 @@ namespace Project.Dev.Infrastructure.Installers.ProjectInstallers
 
         private void BindItemsHandler()
         {
-            Container.Bind<IItemEventHandler<ItemPlacedEvent>>().To<ItemPlacedHandler>().AsTransient();
+            Container.Bind<IItemEventHandler<ItemCoffeEvent>>().To<ItemCoffeHandler>().AsTransient();
         }
 
     }
