@@ -59,7 +59,7 @@ namespace Project.Dev.GamePlay.NPC.Player1
     private void Rotation()
     {
         Vector2 rotationAxis = _inputService.AimAxis;
-        if (rotationAxis.sqrMagnitude > 2f && _cinemachineService.Pov != null)
+        if (rotationAxis.sqrMagnitude > 5f && _cinemachineService.Pov != null)
         {
             _cinemachineService.Pov.m_HorizontalAxis.Value += rotationAxis.x * rotationSpeed * Time.deltaTime;
             _cinemachineService.Pov.m_VerticalAxis.Value -= rotationAxis.y * rotationSpeed * Time.deltaTime;
