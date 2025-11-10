@@ -1,5 +1,6 @@
 using Project.Dev.GamePlay.Items.Event;
 using Project.Dev.GamePlay.Items.Interface;
+using Project.Dev.GamePlay.NPC.Player1;
 using UniRx;
 using UnityEngine;
 
@@ -9,12 +10,15 @@ namespace Project.Dev.GamePlay.Items.Handler
     {
         private readonly int defaultLayer = LayerMask.NameToLayer("Default");
         private readonly int interectableLayer = LayerMask.NameToLayer("InterectableLayer");
+        private readonly HeroInteraction _heroInteraction;
+        public ItemCoffeHandler(HeroInteraction heroInteraction) => _heroInteraction = heroInteraction;
         public void Handle(ItemCoffeEvent evt)
         {
             var item = evt.Item;
             Debug.Log("кофе наливаеться");
             Fixation(item);
             item.layer = defaultLayer;
+            _heroInteraction.dropObject = true;
             Observable.Timer(System.TimeSpan.FromSeconds(5f))
                 .Subscribe(_ =>
                 {

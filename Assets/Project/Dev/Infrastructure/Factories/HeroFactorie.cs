@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using Project.Dev.Infrastructure.Factories.Interfaces;
 using UnityEngine;
 using CustomExtensions.Functional;
+using Project.Dev.GamePlay.NPC.Player1;
 using Project.Dev.Infrastructure.AssetManager;
 using Project.Dev.Services.StaticDataService;
 using Unity.Mathematics;
@@ -39,11 +40,19 @@ namespace Project.Dev.Infrastructure.Factories
 
         public async Task<GameObject> Create(Vector3 at)
         {
-            var config = _staticDataService.ForHero();
-            var prefab = await _assetProvider.Load<GameObject>(key: HeroPrefabId);
+            var prefab = await _assetProvider.Load<GameObject>(HeroPrefabId);
+            var heroGO = Object.Instantiate(prefab, at, Quaternion.identity);
+            _container.InjectGameObject(heroGO);
 
-            return Hero = Object.Instantiate(prefab, at, quaternion.identity)
-                .With(hero => _container.InjectGameObject(hero));
+            var heroInteraction = heroGO.GetComponent<HeroInteraction>();
+
+            // безопасный вариант
+            if (!_container.HasBinding<HeroInteraction>())
+                _container.BindInstance(heroInteraction).AsSingle();
+            else
+                _container.Rebind<HeroInteraction>().FromInstance(heroInteraction);
+
+            return heroGO;
         }
     }
 

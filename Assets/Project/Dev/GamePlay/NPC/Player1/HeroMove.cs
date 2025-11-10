@@ -23,8 +23,8 @@ namespace Project.Dev.GamePlay.NPC.Player1
 
     private void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+       // Cursor.visible = false;
+       // Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()

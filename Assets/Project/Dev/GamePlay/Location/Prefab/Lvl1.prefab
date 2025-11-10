@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stageLocalData:
-    locationName: Lvl2
+    locationName: Lvl1
     playerSpawnPoint: {x: -3, y: -4.5, z: 0}
 --- !u!1001 &2103276569248523321
 PrefabInstance:

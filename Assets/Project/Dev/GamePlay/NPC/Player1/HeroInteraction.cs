@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,6 +23,7 @@ namespace Project.Dev.GamePlay.NPC.Player1
     private ConfigurableJoint heldJoint;
     private Renderer highlightedRenderer;
     private Color originalColor;
+    public bool dropObject = true;
 
     private bool IsHolding => heldObject != null;
 
@@ -35,8 +35,16 @@ namespace Project.Dev.GamePlay.NPC.Player1
 
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
-            if (IsHolding) DropObject();
-            else TryPickupObject();
+            if (IsHolding && !dropObject)
+            {
+                DropObject();
+                dropObject = true;
+            }
+            else if(!IsHolding && dropObject)
+            {
+                TryPickupObject();
+                dropObject = false;
+            }
         }
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
