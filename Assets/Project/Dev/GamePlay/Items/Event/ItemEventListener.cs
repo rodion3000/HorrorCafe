@@ -10,12 +10,11 @@ namespace Project.Dev.GamePlay.Items.Event
     public class ItemEventListener : MonoBehaviour
     {
         private IRxEventService _eventService;
-        private readonly CompositeDisposable _compositeDisposable;
+        private readonly CompositeDisposable _compositeDisposable = new();
 
         [Inject]
         private void Construct(IRxEventService eventService)
         {
-            Debug.Log("dfgfdg");
             _eventService = eventService;
         }
 

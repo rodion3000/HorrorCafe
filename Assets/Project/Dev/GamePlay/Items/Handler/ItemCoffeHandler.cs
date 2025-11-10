@@ -12,10 +12,7 @@ namespace Project.Dev.GamePlay.Items.Handler
         public void Handle(ItemCoffeEvent evt)
         {
             var item = evt.Item;
-
             Debug.Log("кофе наливаеться");
-            var sound = item.GetComponent<AudioSource>();
-            sound.Play();
             Fixation(item);
             item.layer = defaultLayer;
             Observable.Timer(System.TimeSpan.FromSeconds(5f))
@@ -23,8 +20,7 @@ namespace Project.Dev.GamePlay.Items.Handler
                 {
                     UnFixation(item);
                     item.layer = interectableLayer;
-                    if(sound != null && sound.isPlaying)
-                        sound.Stop();
+                    item.tag = "WithCoffee";
                     Debug.Log("кофе готов");
                 });
         }
@@ -36,7 +32,6 @@ namespace Project.Dev.GamePlay.Items.Handler
                 rb.isKinematic = true;
                 rb.useGravity = false;
             }
-
         }
 
         private void UnFixation(GameObject item)
