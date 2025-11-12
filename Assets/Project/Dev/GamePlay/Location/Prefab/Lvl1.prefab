@@ -91,7 +91,7 @@ Transform:
   m_GameObject: {fileID: 5155028416675388074}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.037, y: 0.635, z: 0.395}
+  m_LocalPosition: {x: 0.098, y: 0.158, z: 1.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -277,7 +277,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 912702455439926671, guid: d0e3987c25703604496fcb9a98cf9ccb, type: 3}
       propertyPath: maxAttachDistance
-      value: 0.15
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 912702455439926671, guid: d0e3987c25703604496fcb9a98cf9ccb, type: 3}
+      propertyPath: disableAfterAttach
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1028512901436636240, guid: d0e3987c25703604496fcb9a98cf9ccb, type: 3}
       propertyPath: m_Shadows.m_Type
@@ -336,8 +340,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3465228470783580594, guid: d0e3987c25703604496fcb9a98cf9ccb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.098
+      objectReference: {fileID: 0}
+    - target: {fileID: 3465228470783580594, guid: d0e3987c25703604496fcb9a98cf9ccb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.889
+      value: -0.833
+      objectReference: {fileID: 0}
+    - target: {fileID: 3465228470783580594, guid: d0e3987c25703604496fcb9a98cf9ccb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.16
       objectReference: {fileID: 0}
     - target: {fileID: 3669600611790340688, guid: d0e3987c25703604496fcb9a98cf9ccb, type: 3}
       propertyPath: m_Shadows.m_Type

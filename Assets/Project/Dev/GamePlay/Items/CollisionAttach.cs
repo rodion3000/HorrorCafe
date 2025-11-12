@@ -44,10 +44,14 @@ namespace Project.Dev.GamePlay.Items
         {
             _attached = true;
 
+            var joint = attachObject.GetComponent<ConfigurableJoint>();
+            if (joint != null)
+            {
+                Destroy(joint); 
+            }
             if (attachObject.TryGetComponent<Rigidbody>(out var rb))
             {
-                rb.isKinematic = true;
-                rb.useGravity = false;
+                Destroy(rb);
             }
 
             attachObject.transform.SetParent(transform, true);
