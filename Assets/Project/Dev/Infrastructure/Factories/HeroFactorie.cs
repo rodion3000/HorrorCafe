@@ -46,7 +46,6 @@ namespace Project.Dev.Infrastructure.Factories
 
             var heroInteraction = heroGO.GetComponent<HeroInteraction>();
 
-            // безопасный вариант
             if (!_container.HasBinding<HeroInteraction>())
                 _container.BindInstance(heroInteraction).AsSingle();
             else

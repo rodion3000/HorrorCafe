@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Coffee
   - WithCoffee
+  - Coffe
+  - LidCoffee
   layers:
   - Default
   - TransparentFX

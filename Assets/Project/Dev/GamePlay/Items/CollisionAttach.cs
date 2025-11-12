@@ -1,0 +1,63 @@
+using Project.Dev.GamePlay.NPC.Player1;
+using UnityEngine;
+using Zenject;
+
+namespace Project.Dev.GamePlay.Items
+{
+    public class CollisionAttach : MonoBehaviour
+    {
+        [SerializeField] private string requiredSelfTag;
+        [SerializeField] private string targetTag;
+        [SerializeField] private float maxAttachDistance;
+        [SerializeField] private Transform attachPoint;
+        [SerializeField] private bool disableAfterAttach;
+
+        private string newLayer = "Default";
+        private bool _attached;
+        private HeroInteraction _heroInteraction;
+
+        [Inject]
+        private void Construct(HeroInteraction heroInteraction)
+        {
+            _heroInteraction = heroInteraction;
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            if (!CompareTag(requiredSelfTag))
+                return;
+
+            if (_attached || !other.gameObject.CompareTag(targetTag))
+                return;
+
+            if (attachPoint == null)
+                return;
+
+            float distance = Vector3.Distance(attachPoint.position, transform.position);
+            if (distance > maxAttachDistance)
+                return;
+
+            AttachObject(other.gameObject);
+        }
+
+        private void AttachObject(GameObject attachObject)
+        {
+            _attached = true;
+
+            if (attachObject.TryGetComponent<Rigidbody>(out var rb))
+            {
+                rb.isKinematic = true;
+                rb.useGravity = false;
+            }
+
+            attachObject.transform.SetParent(transform, true);
+            attachObject.transform.position = attachPoint.position;
+            attachObject.transform.rotation = attachPoint.rotation;
+            attachObject.layer = LayerMask.NameToLayer(newLayer);
+            _heroInteraction.DropObjectFlag = true;
+
+            if (disableAfterAttach)
+                Destroy(this, 0.5f);
+        }
+    }
+}

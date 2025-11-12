@@ -23,27 +23,36 @@ namespace Project.Dev.GamePlay.NPC.Player1
     private ConfigurableJoint heldJoint;
     private Renderer highlightedRenderer;
     private Color originalColor;
-    public bool dropObject = true;
 
     private bool IsHolding => heldObject != null;
 
     private void Awake() => cam = Camera.main;
 
+    public bool DropObjectFlag
+    {
+        get => true;
+        set
+        {
+            if (value && IsHolding)
+            {
+                DropObject();
+            }
+        }
+    }
     private void Update()
     {
         HandleHighlight();
 
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
-            if (IsHolding && !dropObject)
+            if (IsHolding)
             {
-                DropObject();
-                dropObject = true;
+                DropObjectFlag = true;
             }
-            else if(!IsHolding && dropObject)
+            else if (!IsHolding)
             {
                 TryPickupObject();
-                dropObject = false;
+                DropObjectFlag = false;
             }
         }
 

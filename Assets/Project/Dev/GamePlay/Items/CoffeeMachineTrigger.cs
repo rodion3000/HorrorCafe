@@ -1,4 +1,3 @@
-using System;
 using Project.Dev.GamePlay.Items.Event;
 using Project.Dev.Services.Interfaces;
 using UnityEngine;

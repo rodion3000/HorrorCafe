@@ -1,6 +1,7 @@
 using Project.Dev.GamePlay.Items.Event;
 using Project.Dev.GamePlay.Items.Interface;
 using Project.Dev.GamePlay.NPC.Player1;
+using TMPro;
 using UniRx;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ namespace Project.Dev.GamePlay.Items.Handler
             Debug.Log("кофе наливаеться");
             Fixation(item);
             item.layer = defaultLayer;
-            _heroInteraction.dropObject = true;
+            _heroInteraction.DropObjectFlag = true;
             Observable.Timer(System.TimeSpan.FromSeconds(5f))
                 .Subscribe(_ =>
                 {
