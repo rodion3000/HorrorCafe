@@ -17,14 +17,17 @@ namespace Project.Dev.Infrastructure.Factories
         private readonly IStaticDataService _staticDataService;
         private readonly IAssetProvider _assetProvider;
         private readonly DiContainer _container;
+        private readonly IRegistryComponent<GameObject> _heroRegistry;
 
         [CanBeNull] public GameObject Hero { get; private set; }
 
-        public HeroFactorie(IStaticDataService staticDataService, IAssetProvider assetProvider, DiContainer container)
+        public HeroFactorie(IStaticDataService staticDataService, IAssetProvider assetProvider, DiContainer container,
+            IRegistryComponent<GameObject> heroRegistry)
         {
             _staticDataService = staticDataService;
             _assetProvider = assetProvider;
             _container = container;
+            _heroRegistry = heroRegistry;
         }
 
         public async Task WarmUp()
@@ -41,17 +44,9 @@ namespace Project.Dev.Infrastructure.Factories
         public async Task<GameObject> Create(Vector3 at)
         {
             var prefab = await _assetProvider.Load<GameObject>(HeroPrefabId);
-            var heroGO = Object.Instantiate(prefab, at, Quaternion.identity);
-            _container.InjectGameObject(heroGO);
-
-            var heroInteraction = heroGO.GetComponent<HeroInteraction>();
-
-            if (!_container.HasBinding<HeroInteraction>())
-                _container.BindInstance(heroInteraction).AsSingle();
-            else
-                _container.Rebind<HeroInteraction>().FromInstance(heroInteraction);
-
-            return heroGO;
+            return Hero = Object.Instantiate(prefab, at, Quaternion.identity)
+                .With(hero => _container.InjectGameObject(hero))
+                .With(hero => _heroRegistry.Register(hero));
         }
     }
 

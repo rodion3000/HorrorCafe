@@ -5,6 +5,7 @@ using Project.Dev.GamePlay.Items.Handler;
 using Project.Dev.GamePlay.Items.Interface;
 using Project.Dev.Infrastructure.AssetManager;
 using Project.Dev.Infrastructure.Factories;
+using Project.Dev.Infrastructure.Factories.Components;
 using Project.Dev.Infrastructure.Factories.Interfaces;
 using Project.Dev.Infrastructure.SceneManagment;
 using Project.Dev.Services.CinemachineService;
@@ -29,6 +30,7 @@ namespace Project.Dev.Infrastructure.Installers.ProjectInstallers
             Container.BindInterfacesAndSelfTo<AddressableProvider>().AsSingle();
             Container.Bind<SceneLoader>().AsSingle();
             BindServices();
+            BindRegistryComponents();
             BindFactories();
             BindItemsHandler();
         }
@@ -69,6 +71,12 @@ namespace Project.Dev.Infrastructure.Installers.ProjectInstallers
         private void BindItemsHandler()
         {
             Container.Bind<IItemEventHandler<ItemCoffeEvent>>().To<ItemCoffeHandler>().AsTransient();
+        }
+
+        private void BindRegistryComponents()
+        {
+            Container.BindInterfacesAndSelfTo<HeroRegistryComponents>().AsSingle();
+            Container.BindInterfacesAndSelfTo<StageRegistryComponents>().AsSingle();
         }
 
     }
