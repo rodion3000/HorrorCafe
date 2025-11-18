@@ -1,4 +1,4 @@
-using Project.Dev.GamePlay.NPC.Player1;
+using Project.Dev.Infrastructure.Registers.Hero;
 using UnityEngine;
 using Zenject;
 
@@ -14,12 +14,12 @@ namespace Project.Dev.GamePlay.Items
 
         private string newLayer = "Default";
         private bool _attached;
-        private HeroInteraction _heroInteraction;
+        private HeroRegistry _heroRegistry;
 
         [Inject]
-        private void Construct(HeroInteraction heroInteraction)
+        private void Construct(HeroRegistry heroRegistry)
         {
-            _heroInteraction = heroInteraction;
+            _heroRegistry = heroRegistry;
         }
 
         private void OnCollisionEnter(Collision other)
@@ -58,7 +58,7 @@ namespace Project.Dev.GamePlay.Items
             attachObject.transform.position = attachPoint.position;
             attachObject.transform.rotation = attachPoint.rotation;
             attachObject.layer = LayerMask.NameToLayer(newLayer);
-            _heroInteraction.DropObjectFlag = true;
+            _heroRegistry.HeroInteraction.DropObjectFlag = true;
 
             if (disableAfterAttach)
                 Destroy(this, 0.5f);

@@ -1,12 +1,11 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Project.Dev.Infrastructure.Factories.Interfaces;
 using UnityEngine;
-using CustomExtensions.Functional;
-using Project.Dev.GamePlay.NPC.Player1;
 using Project.Dev.Infrastructure.AssetManager;
+using Project.Dev.Infrastructure.Registers.Interface;
 using Project.Dev.Services.StaticDataService;
-using Unity.Mathematics;
 using Zenject;
 
 namespace Project.Dev.Infrastructure.Factories
@@ -17,14 +16,17 @@ namespace Project.Dev.Infrastructure.Factories
         private readonly IStaticDataService _staticDataService;
         private readonly IAssetProvider _assetProvider;
         private readonly DiContainer _container;
+        private readonly List<IHeroRegistry> _heroRegistries;
 
         [CanBeNull] public GameObject Hero { get; private set; }
 
-        public HeroFactorie(IStaticDataService staticDataService, IAssetProvider assetProvider, DiContainer container)
+        public HeroFactorie(IStaticDataService staticDataService, IAssetProvider assetProvider, DiContainer container
+            ,List<IHeroRegistry> heroRegistries)
         {
             _staticDataService = staticDataService;
             _assetProvider = assetProvider;
             _container = container;
+            _heroRegistries = heroRegistries;
         }
 
         public async Task WarmUp()
@@ -44,12 +46,10 @@ namespace Project.Dev.Infrastructure.Factories
             var heroGO = Object.Instantiate(prefab, at, Quaternion.identity);
             _container.InjectGameObject(heroGO);
 
-            var heroInteraction = heroGO.GetComponent<HeroInteraction>();
-
-            if (!_container.HasBinding<HeroInteraction>())
-                _container.BindInstance(heroInteraction).AsSingle();
-            else
-                _container.Rebind<HeroInteraction>().FromInstance(heroInteraction);
+            foreach (var r in _heroRegistries)
+            {
+                r.Registry(heroGO);
+            }
 
             return heroGO;
         }

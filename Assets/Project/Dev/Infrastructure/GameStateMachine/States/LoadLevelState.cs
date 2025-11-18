@@ -52,8 +52,8 @@ namespace Project.Dev.Infrastructure.GameStateMachine.States
 
         private async Task WarmUpAndLoad()
         {
-            await _heroFactory.WarmUp();
             await _stageFactorie.WarmUp(_stageLocalData.locationName);
+            await _heroFactory.WarmUp();
             
             var sceneInstance = await _sceneLoader.Load(SceneName.Core);
 
@@ -77,8 +77,8 @@ namespace Project.Dev.Infrastructure.GameStateMachine.States
 
         private async Task InitGameWorld()
         {
-            _stageProgressData.Hero = await SetupHero();
             await SetupLocation();
+            _stageProgressData.Hero = await SetupHero();
             SetupCamera(_stageProgressData.Hero);
         }
         private void SetupCamera(GameObject hero)
